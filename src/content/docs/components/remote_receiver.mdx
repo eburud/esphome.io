@@ -48,6 +48,7 @@ Multiple remote receivers can be configured as a list of dict definitions within
   - **dooya**: Decode and dump Dooya RF codes.
   - **drayton**: Decode and dump Drayton Digistat RF codes.
   - **dyson**: Decode and dump Dyson Cool AM7 tower fan codes.
+  - **funkbus**: Decode and dump Funkbus RF codes.
   - **hob2hood**: Decode and dump AEG Hob2Hood infrared codes.
   - **jvc**: Decode and dump JVC infrared codes.
   - **gobox**: Decode and dump Go-Box infrared codes.
@@ -224,6 +225,10 @@ To enable signal demodulation, configure the signal carrier frequency and duty c
 
 - **on_dyson** (*Optional*, [Automation](/automations)): An automation to perform when a
   Dyson cool AM07 code has been decoded. A variable `x` of type <APIStruct text="remote_base::DysonData" path="remote_base::DysonData" />
+  is passed to the automation for use in lambdas.
+
+- **on_funkbus** (*Optional*, [Automation](/automations)): An automation to perform when a
+  Funkbus RF code has been decoded. A variable `x` of type <APIStruct text="remote_base::FunkbusData" path="remote_base::FunkbusData" />
   is passed to the automation for use in lambdas.
 
 - **on_gobox** (*Optional*, [Automation](/automations)): An automation to perform when a
@@ -525,6 +530,16 @@ Remote code selection (exactly one of these has to be included):
 
   - **code** (**Required**, int): The 16-bit code to trigger on, e.g. 0x1200=power, 0x1215=fan++,0x122a=swing..., see dumper output for more info.
   - **index** (*Optional*, int): The 8-bit rolling index [0..3], to be increased with every transmit, see dumper output for more info.
+
+- **funkbus**: Trigger on a decoded Funkbus RF code with the given data.
+
+  - **serial** (**Optional**, int): The 32-bit (Only 20-bits are used) code to trigger on.
+  - **command** (*Optional*, int): The 8-bit command.
+  - **group** (*Optional*, int): The 8-bit group.
+  - **action** (*Optional*, int): The 8-bit action.
+  - **longpress** (*Optional*, bool): The 1-bit. 0 - Short press, 1 - Long press.
+  - **repeated** (*Optional*, bool): The 1-bit. 0 - First frame, 1 - Repeated frame.
+  - **battery_low** (*Optional*, bool): The 1-bit. 0 - OK, 1 - Low battery.
 
 - **gobox**: Trigger on a decoded Go-Box remote code with the given data.
 

@@ -474,6 +474,31 @@ on_...:
 > random manner. On every transmit the **index** variable must loop to let the **..transmit_dyson** function
 > generate a code that differs from the previous one.
 
+<span id="remote_transmitter-transmit_funkbus"></span>
+
+This [action](/automations/actions#config-action) sends a Funkbus RF code to a remote transmitter.
+
+```yaml
+on_...:
+  - remote_transmitter.transmit_funkbus:
+      serial: 0xfffff
+      command: 1
+      group: 0
+      action: 0
+      repeated: false
+      longpress: false
+```
+
+#### Configuration variables
+
+  - **serial** (**Required**, int): The 32-bit (Only 20-bits are used) code to trigger on.
+  - **command** (*Required*, int): The 8-bit command.
+  - **group** (*Required*, int): The 8-bit group.
+  - **action** (*Required*, int): The 8-bit action.
+  - **longpress** (*Required*, bool): The 1-bit. 0 - Short press, 1 - Long press.
+  - **repeated** (*Required*, bool): The 1-bit. 0 - First frame, 1 - Repeated frame.
+  - **battery_low** (*Optional*, bool): The 1-bit. 0 - OK, 1 - Low battery.
+
 <span id="remote_transmitter-transmit_gobox"></span>
 
 ### `remote_transmitter.transmit_gobox` Action
